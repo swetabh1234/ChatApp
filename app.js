@@ -100,7 +100,29 @@ const leaveRoom = (clientID, roomID) => {
     }
 }
 
+/**
+ * Clients change the room's name -> only allow the room's creator to change name
+ * @param {*} clientID 
+ * @param {*} roomID 
+ * @param {*} newRoomName 
+ */
 
+ const changeRoomName = (clientID, roomID, newRoomName) => {
+    if (typeof clientID === 'undefined' || typeof roomID === 'undefined' || typeof newRoomName === 'undefined') {
+        throw new Error('Error: params are not passed into the function');
+    } else if (allRoomObj[roomID] === undefined) {
+        throw new Error('Error: Room does not exist !!');
+    } else {
+        let room = allRoomObj[roomID];
+        let roomCreator = allRoomObj[roomID].creator;
+        if (clientID !== roomCreator) {
+            throw new Error("Error: Only the room's creator is allowed to change room name !!");
+        } else {
+            room.changeName(newRoomName);
+            roomList[roomID] = newRoomName;
+        }
+    }
+}
 
 
 //==============================================
