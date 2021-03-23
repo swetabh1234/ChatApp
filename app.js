@@ -100,7 +100,46 @@ const leaveRoom = (clientID, roomID) => {
     }
 }
 
+/**
+ * Clients change the room's name -> only allow the room's creator to change name
+ * @param {*} clientID 
+ * @param {*} roomID 
+ * @param {*} newRoomName 
+ */
 
+ const changeRoomName = (clientID, roomID, newRoomName) => {
+    if (typeof clientID === 'undefined' || typeof roomID === 'undefined' || typeof newRoomName === 'undefined') {
+        throw new Error('Error: params are not passed into the function');
+    } else if (allRoomObj[roomID] === undefined) {
+        throw new Error('Error: Room does not exist !!');
+    } else {
+        let room = allRoomObj[roomID];
+        let roomCreator = allRoomObj[roomID].creator;
+        if (clientID !== roomCreator) {
+            throw new Error("Error: Only the room's creator is allowed to change room name !!");
+        } else {
+            room.changeName(newRoomName);
+            roomList[roomID] = newRoomName;
+        }
+    }
+}
+
+//=============================================
+// PRIVATE ROOM FUNCTIONS
+//=============================================
+const createPrivateRoom = (senderId, receiverId, senderName, receiverName) => {
+    // check if both params are passed into
+    if (typeof senderId === 'undefined' || typeof receiverId === 'undefined' || typeof senderName === 'undefined' || typeof receiverName === 'undefined') {
+        throw new Error('Error: params are not passed into the function');
+    } else {
+        let newPrivateRoom = new PrivateRoom(senderId, receiverId, senderName, receiverName);
+        newPrivateRoom.addClient(receiverId);
+        let roomId = newPrivateRoom.id;
+        console.log(roomId);
+        allPrivateRoom[roomId] = newPrivateRoom;
+        return roomId;
+    }
+}
 
 
 //==============================================
