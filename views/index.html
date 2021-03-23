@@ -156,7 +156,7 @@
             // remove the room when an user leaves
             socket.on('leave room', (data) => {
                 $(`#${data.roomId}_box`).remove();
-                $(`#main_msg`).append(`<li><em> ${data.clientName} </em> leaved ${data.roomName}!</li>`);
+                $(`#main_msg`).append(`<li><em> ${data.clientName} </em> left ${data.roomName}!</li>`);
             })
 
             socket.on('leave room error', (err) => {
