@@ -124,6 +124,23 @@ const leaveRoom = (clientID, roomID) => {
     }
 }
 
+//=============================================
+// PRIVATE ROOM FUNCTIONS
+//=============================================
+const createPrivateRoom = (senderId, receiverId, senderName, receiverName) => {
+    // check if both params are passed into
+    if (typeof senderId === 'undefined' || typeof receiverId === 'undefined' || typeof senderName === 'undefined' || typeof receiverName === 'undefined') {
+        throw new Error('Error: params are not passed into the function');
+    } else {
+        let newPrivateRoom = new PrivateRoom(senderId, receiverId, senderName, receiverName);
+        newPrivateRoom.addClient(receiverId);
+        let roomId = newPrivateRoom.id;
+        console.log(roomId);
+        allPrivateRoom[roomId] = newPrivateRoom;
+        return roomId;
+    }
+}
+
 
 //==============================================
 // SOCKET.IO EVENTS
