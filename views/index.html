@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Chat App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font: 16px Helvetica, Arial;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 5px 10px;
+        }
+
+        li {
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        #user_list,
+        #room_list {
+            margin: 10px;
+            border: 2px solid black;
+        }
+
+        #user_list div,
+        #room_list div {
+            padding: 10px;
+        }
+
+        .chat_box {
+            margin: 10px;
+            border: 2px solid black;
+        }
+
+        .chat_form {
+            background: #000;
+            padding: 3px;
+            margin: 20px;
+            width: 80%;
+        }
+
+        .chat_form input {
+            border: 0;
+            padding: 10px;
+            width: 70%;
+            margin-right: .5%;
+        }
+
+        .chat_form button {
+            width: 29%;
+            background: rgb(16, 48, 141);
+            border: none;
+            padding: 10px;
+        }
+
+        .private_box {
+            margin: 10px;
+            border: 2px solid deepskyblue;
+        }
+
+        .private_form button {
+            background: deepskyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="room_list">
+        <b>ROOMS</b>
+        <div id="room"></div>
+        <form id="room_form" action="">
+            <input type="text" name="message" id="room_name" placeholder="enter room name..." autocomplete="off" /><button>CREATE ROOM</button>
+        </form>
+    </div>
+
+    <div id="user_list">
+        <b>USERS</b>
+        <div id="user"></div>
+    </div>
+
+    <div class="container">
+        <div class="chat_box" id="main_box"> <strong> Main Notification Box </strong>
+            <ul id="main_msg"></ul>
+            <form class="chat_form" id="main_msg_form" action="">
+                <input type="text" name="message" id="main_m" autocomplete="off" /><button>Send</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="private_container">
+
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</body>
+
+</html>
